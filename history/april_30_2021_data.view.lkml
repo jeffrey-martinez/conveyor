@@ -1,5 +1,5 @@
 view: april_30_2021_data {
-  sql_table_name: `tres.2021_04_30_data`
+  sql_table_name: `shoot-your-shot-313802.underscores_allowed.the_data_2021_04_30`
     ;;
 
   dimension: age_yrs {

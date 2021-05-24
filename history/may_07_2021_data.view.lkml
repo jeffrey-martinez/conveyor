@@ -1,17 +1,10 @@
-view: v_data {
-  sql_table_name: `tres.v_data`
+view: may_07_2021_data {
+  sql_table_name: `shoot-your-shot-313802.underscores_allowed.the_data_2021_05_07`
     ;;
 
   dimension: age_yrs {
     type: number
     sql: ${TABLE}.AGE_YRS ;;
-  }
-
-  dimension: age_tiers {
-    type: tier
-    style: integer
-    tiers: [0,10,20,30,40,50,60,70,80]
-    sql: ${age_yrs} ;;
   }
 
   dimension: allergies {
@@ -20,24 +13,21 @@ view: v_data {
   }
 
   dimension: birth_defect {
-    type: string
+    type: yesno
     sql: ${TABLE}.BIRTH_DEFECT ;;
   }
 
   dimension: cage_mo {
-    hidden: yes
     type: number
     sql: ${TABLE}.CAGE_MO ;;
   }
 
   dimension: cage_yr {
-    label: "Current Age"
     type: number
     sql: ${TABLE}.CAGE_YR ;;
   }
 
   dimension: cur_ill {
-    label: "Current Illness"
     type: string
     sql: ${TABLE}.CUR_ILL ;;
   }
@@ -57,33 +47,18 @@ view: v_data {
     sql: ${TABLE}.DATEDIED ;;
   }
 
-  dimension_group: vaccinated_to_died {
-    type: duration
-    sql_start: ${TABLE}.VAX_DATE ;;
-    sql_end: ${TABLE}.DATEDIED ;;
-    timeframes: [
-      raw,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-  }
-
   dimension: died {
     type: yesno
     sql: ${TABLE}.DIED ;;
   }
 
   dimension: disable {
-    description: "Is the patient disabled?"
     type: yesno
     sql: ${TABLE}.DISABLE ;;
   }
 
   dimension: er_ed_visit {
-    type: string
+    type: yesno
     sql: ${TABLE}.ER_ED_VISIT ;;
   }
 
@@ -93,31 +68,26 @@ view: v_data {
   }
 
   dimension: form_vers {
-    hidden: yes
     type: number
     sql: ${TABLE}.FORM_VERS ;;
   }
 
   dimension: history {
-    label: "Medical History"
     type: string
     sql: ${TABLE}.HISTORY ;;
   }
 
   dimension: hospdays {
-    label: "Days spent in hospital"
     type: number
     sql: ${TABLE}.HOSPDAYS ;;
   }
 
   dimension: hospital {
-    label: "Required hospitalization?"
     type: yesno
     sql: ${TABLE}.HOSPITAL ;;
   }
 
   dimension: l_threat {
-    label: "Life threatening?"
     type: yesno
     sql: ${TABLE}.L_THREAT ;;
   }
@@ -128,28 +98,13 @@ view: v_data {
   }
 
   dimension: numdays {
-    label: "Days from vaccination to onset"
     type: number
     sql: ${TABLE}.NUMDAYS ;;
   }
 
   dimension: ofc_visit {
-    type: string
+    type: yesno
     sql: ${TABLE}.OFC_VISIT ;;
-  }
-
-  dimension_group: vaccinated_to_onset {
-    type: duration
-    sql_start: ${TABLE}.VAX_DATE ;;
-    sql_end: ${TABLE}.ONSET_DATE ;;
-    timeframes: [
-      raw,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
   }
 
   dimension_group: onset {
@@ -178,7 +133,6 @@ view: v_data {
   }
 
   dimension: recovd {
-    label: "Is recovered?"
     type: string
     sql: ${TABLE}.RECOVD ;;
   }
@@ -233,8 +187,18 @@ view: v_data {
     sql: ${TABLE}.SYMPTOM_TEXT ;;
   }
 
-  dimension: todays_date {
-    type: string
+  dimension_group: todays {
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
     sql: ${TABLE}.TODAYS_DATE ;;
   }
 
@@ -249,7 +213,6 @@ view: v_data {
   }
 
   dimension: vaers_id {
-    primary_key: yes
     type: number
     sql: ${TABLE}.VAERS_ID ;;
   }
@@ -276,6 +239,6 @@ view: v_data {
 
   measure: count {
     type: count
-    drill_fields: [vaers_id, sex, age_yrs, vax_date, onset_date, v_adminby, allergies, symptom_text]
+    drill_fields: []
   }
 }
