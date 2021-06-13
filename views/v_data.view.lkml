@@ -274,8 +274,18 @@ view: v_data {
     sql: ${TABLE}.X_STAY ;;
   }
 
+  measure: max_id {
+    type: max
+    sql: ${vaers_id} ;;
+  }
+
   measure: count {
     type: count
-    drill_fields: [vaers_id, sex, age_yrs, vax_date, onset_date, v_adminby, allergies, symptom_text]
+    filters: [vaers_id: "NOT NULL"]
+    drill_fields: [drill_set*]
+  }
+
+  set: drill_set {
+    fields: [vaers_id, sex, age_yrs, vax_date, onset_date, v_adminby, allergies, symptom_text, died, datedied_date]
   }
 }
