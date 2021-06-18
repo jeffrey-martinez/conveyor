@@ -225,7 +225,71 @@ view: v_data {
 
   dimension: state {
     type: string
-    sql: ${TABLE}.STATE ;;
+    sql: UPPER(${TABLE}.STATE) ;;
+  }
+
+  dimension: state_name {
+    type: string
+    sql: CASE
+WHEN ${state} = 'AK' THEN 'ALASKA'
+WHEN ${state} = 'AL' THEN 'ALABAMA'
+WHEN ${state} = 'AR' THEN 'ARKANSAS'
+WHEN ${state} = 'AS' THEN 'AMERICAN SAMOA'
+WHEN ${state} = 'AZ' THEN 'ARIZONA '
+WHEN ${state} = 'CA' THEN 'CALIFORNIA '
+WHEN ${state} = 'CO' THEN 'COLORADO '
+WHEN ${state} = 'CT' THEN 'CONNECTICUT'
+WHEN ${state} = 'DC' THEN 'DISTRICT OF COLUMBIA'
+WHEN ${state} = 'DE' THEN 'DELAWARE'
+WHEN ${state} = 'FL' THEN 'FLORIDA'
+WHEN ${state} = 'FM' THEN 'FEDERATED STATES OF MICRONESIA'
+WHEN ${state} = 'GA' THEN 'GEORGIA'
+WHEN ${state} = 'GU' THEN 'GUAM '
+WHEN ${state} = 'HI' THEN 'HAWAII'
+WHEN ${state} = 'IA' THEN 'IOWA'
+WHEN ${state} = 'ID' THEN 'IDAHO'
+WHEN ${state} = 'IL' THEN 'ILLINOIS'
+WHEN ${state} = 'IN' THEN 'INDIANA'
+WHEN ${state} = 'KS' THEN 'KANSAS'
+WHEN ${state} = 'KY' THEN 'KENTUCKY'
+WHEN ${state} = 'LA' THEN 'LOUISIANA'
+WHEN ${state} = 'MA' THEN 'MASSACHUSETTS'
+WHEN ${state} = 'MD' THEN 'MARYLAND'
+WHEN ${state} = 'ME' THEN 'MAINE'
+WHEN ${state} = 'MH' THEN 'MARSHALL ISLANDS'
+WHEN ${state} = 'MI' THEN 'MICHIGAN'
+WHEN ${state} = 'MN' THEN 'MINNESOTA'
+WHEN ${state} = 'MO' THEN 'MISSOURI'
+WHEN ${state} = 'MP' THEN 'NORTHERN MARIANA ISLANDS'
+WHEN ${state} = 'MS' THEN 'MISSISSIPPI'
+WHEN ${state} = 'MT' THEN 'MONTANA'
+WHEN ${state} = 'NC' THEN 'NORTH CAROLINA'
+WHEN ${state} = 'ND' THEN 'NORTH DAKOTA'
+WHEN ${state} = 'NE' THEN 'NEBRASKA'
+WHEN ${state} = 'NH' THEN 'NEW HAMPSHIRE'
+WHEN ${state} = 'NJ' THEN 'NEW JERSEY'
+WHEN ${state} = 'NM' THEN 'NEW MEXICO'
+WHEN ${state} = 'NV' THEN 'NEVADA'
+WHEN ${state} = 'NY' THEN 'NEW YORK'
+WHEN ${state} = 'OH' THEN 'OHIO'
+WHEN ${state} = 'OK' THEN 'OKLAHOMA'
+WHEN ${state} = 'OR' THEN 'OREGON'
+WHEN ${state} = 'PA' THEN 'PENNSYLVANIA'
+WHEN ${state} = 'PR' THEN 'PUERTO RICO'
+WHEN ${state} = 'RI' THEN 'RHODE ISLAND'
+WHEN ${state} = 'SC' THEN 'SOUTH CAROLINA'
+WHEN ${state} = 'SD' THEN 'SOUTH DAKOTA'
+WHEN ${state} = 'TN' THEN 'TENNESSEE'
+WHEN ${state} = 'TX' THEN 'TEXAS'
+WHEN ${state} = 'UT' THEN 'UTAH'
+WHEN ${state} = 'VA' THEN 'VIRGINIA '
+WHEN ${state} = 'VI' THEN 'VIRGIN ISLANDS'
+WHEN ${state} = 'VT' THEN 'VERMONT'
+WHEN ${state} = 'WA' THEN 'WASHINGTON'
+WHEN ${state} = 'WI' THEN 'WISCONSIN'
+WHEN ${state} = 'WV' THEN 'WEST VIRGINIA'
+WHEN ${state} = 'WY' THEN 'WYOMING'
+ELSE '' END ;;
   }
 
   dimension: symptom_text {

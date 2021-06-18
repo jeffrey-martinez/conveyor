@@ -18,6 +18,7 @@ view: april_30_2021_data {
   }
 
   measure: week_1_not_in_2_deaths {
+    label: "April 30 vs. May 07"
     type: count
     filters: [a30_m07_check: "Yes", died: "Yes"]
     drill_fields: [drill_set*]
@@ -43,6 +44,7 @@ view: may_07_2021_data {
   }
 
   measure: week_2_not_in_3_deaths {
+    label: "May 07 vs May 14"
     type: count
     filters: [m07_m14_check: "Yes", died: "Yes"]
     drill_fields: [drill_set*]
@@ -68,6 +70,7 @@ view: may_14_2021_data {
   }
 
   measure: week_3_not_in_4_deaths {
+    label: "May 14 vs. May 21"
     type: count
     filters: [m14_m21_check: "Yes", died: "Yes"]
     drill_fields: [drill_set*]
@@ -93,6 +96,7 @@ view: may_21_2021_data {
   }
 
   measure: week_4_not_in_5_deaths {
+    label: "May 21 vs. May 28"
     type: count
     filters: [m21_m28_check: "Yes", died: "Yes"]
     drill_fields: [drill_set*]
@@ -118,6 +122,7 @@ view: may_28_2021_data {
   }
 
   measure: week_5_not_in_6_deaths {
+    label: "May 28 vs. June 04"
     type: count
     filters: [m28_ju04_check: "Yes", died: "Yes"]
     drill_fields: [drill_set*]
@@ -129,4 +134,30 @@ view: june_04_2021_data {
   extends: [v_data]
   sql_table_name: `shoot-your-shot-313802.underscores_allowed.the_data_2021_06_04`
     ;;
+
+  dimension: ju04_ju11_check {
+    view_label: " Comparison Filters"
+    type: yesno
+    sql: (${june_04_2021_data.vaers_id} > 0) AND ( ${june_11_2021_data.vaers_id} IS NULL) ;;
   }
+
+  measure: week_6_not_in_7 {
+    type: count
+    filters: [ju04_ju11_check: "Yes"]
+    drill_fields: [drill_set*]
+  }
+
+  measure: week_6_not_in_7_deaths {
+    label: "June 04 vs. June 11"
+    type: count
+    filters: [ju04_ju11_check: "Yes", died: "Yes"]
+    drill_fields: [drill_set*]
+    html: {{ june_04_2021_data.week_6_not_in_7._rendered_value }} rows missing since previous week, including {{rendered_value}} deaths ;;
+  }
+  }
+
+view: june_11_2021_data {
+  extends: [v_data]
+  sql_table_name: `shoot-your-shot-313802.underscores_allowed.the_data_2021_06_11`
+    ;;
+}
