@@ -43,6 +43,11 @@ explore: april_30_2021_data {
     relationship: one_to_one
     sql_on: ${june_04_2021_data.vaers_id} = ${june_11_2021_data.vaers_id} ;;
   }
+  join: june_18_2021_data {
+    type: full_outer
+    relationship: one_to_one
+    sql_on: ${june_11_2021_data.vaers_id} = ${june_18_2021_data.vaers_id} ;;
+  }
 }
 
 explore: v_data {
@@ -55,5 +60,9 @@ explore: v_data {
   join: vax {
     relationship: many_to_many
     sql_on: ${v_data.vaers_id} = ${vax.vaers_id} ;;
+  }
+  join: st {
+    relationship: one_to_many
+    sql_on: ${v_data.vaers_id} = ${st.vaers_id} ;;
   }
 }

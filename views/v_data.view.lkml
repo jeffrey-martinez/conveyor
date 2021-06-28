@@ -3,11 +3,13 @@ view: v_data {
     ;;
 
   dimension: age_yrs {
+    group_label: "Age"
     type: number
     sql: ${TABLE}.AGE_YRS ;;
   }
 
   dimension: age_tiers {
+    group_label: "Age"
     type: tier
     style: integer
     tiers: [0,10,20,30,40,50,60,70,80]
@@ -31,6 +33,7 @@ view: v_data {
   }
 
   dimension: cage_yr {
+    group_label: "Age"
     label: "Current Age"
     type: number
     sql: ${TABLE}.CAGE_YR ;;
@@ -224,6 +227,7 @@ view: v_data {
   }
 
   dimension: state {
+    map_layer_name: us_states
     type: string
     sql: UPPER(${TABLE}.STATE) ;;
   }
@@ -350,6 +354,6 @@ ELSE '' END ;;
   }
 
   set: drill_set {
-    fields: [vaers_id, sex, age_yrs, vax_date, onset_date, v_adminby, allergies, symptom_text, died, datedied_date]
+    fields: [vaers_id, sex, age_yrs, vax.vax_type, vax_date, onset_date, v_adminby, state_name, allergies, symptom_text, symptoms.symptom_concat, died, datedied_date]
   }
 }
